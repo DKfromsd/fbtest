@@ -21,7 +21,7 @@ def verify():
 
 
 @app.route('/', methods=['POST'])
-def webook():
+def webhook():
 
     # endpoint for processing incoming messaging events
 
@@ -38,8 +38,19 @@ def webook():
                     sender_id = messaging_event["sender"]["id"]        # the facebook ID of the person sending you the message
                     recipient_id = messaging_event["recipient"]["id"]  # the recipient's ID, which should be your page's facebook ID
                     message_text = messaging_event["message"]["text"]  # the message's text
-
-                    send_message(sender_id, "got it, thanks!")
+                    # Test for Fiance search result
+                    
+                    consult="https://www.stockconsultant.com/consultnow/basicplus.cgi?symbol="
+                    seeking_alpha="https://seekingalpha.com/symbol/"
+                    inter2="?s="
+                    space="\n\n"
+                    
+                    quote_consult=consult+message_text                    
+                    quote_sa=seeking_alpha+message_text+inter2+message_text
+                    
+                    quote=quote_consult+space+quote_sa
+                    
+                    send_message(sender_id,quote)
 
                 if messaging_event.get("delivery"):  # delivery confirmation
                     pass
