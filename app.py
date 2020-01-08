@@ -39,7 +39,14 @@ def webhook():
                     recipient_id = messaging_event["recipient"]["id"]  # the recipient's ID, which should be your page's facebook ID
                     message_text = messaging_event["message"]["text"]  # the message's text
                     # Test for Fiance search result
-                    
+					#https://finance.yahoo.com/quote/GLD?p=GLD&.tsrc=fin-srch-v1
+					#
+					#
+					
+                    yahoofinance = "https://finance.yahoo.com/quote/"
+					inter3="?p="
+					inter4="&.tsrc=fin-srch-v1"
+					
                     consult="https://www.stockconsultant.com/consultnow/basicplus.cgi?symbol="
                     seeking_alpha="https://seekingalpha.com/symbol/"
                     inter2="?s="
@@ -47,8 +54,8 @@ def webhook():
                     
                     quote_consult=consult+message_text                    
                     quote_sa=seeking_alpha+message_text+inter2+message_text
-                    
-                    quote=quote_consult+space+quote_sa
+                    quote_yahoo=yahoofinance+message_text+inter3+message+inter4
+                    quote=quote_consult+space+quote_sa+space+quote_yahoo
                     
                     send_message(sender_id,quote)
 
