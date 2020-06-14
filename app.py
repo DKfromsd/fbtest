@@ -48,7 +48,7 @@ def webhook():
                     quote_sa=seeking_alpha+message_text+inter2+message_text
                     quote_yahoo=yahoofinance+message_text+inter3+message_text+inter4
 					quote_marketbeat=marketbeat+message_text
-                    quote=quote_consult+space+quote_sa+space+quote_yahoo+space+quote_marketbeat
+                    quote=quote_consult+space+quote_sa+space+quote_yahoo+space+quote_marketbeat+space
                     send_message(sender_id,quote)
                 if messaging_event.get("delivery"):  # delivery confirmation
                     pass
