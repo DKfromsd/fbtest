@@ -41,13 +41,13 @@ def webhook():
                     inter4="&.tsrc=fin-srch-v1"
                     consult="https://www.stockconsultant.com/consultnow/basicplus.cgi?symbol="
                     seeking_alpha="https://seekingalpha.com/symbol/"
-					marketbeat="https://www.marketbeat.com/stocks/NYSE/"
+                    marketbeat="https://www.marketbeat.com/stocks/NYSE/"
                     inter2="?s="
                     space="\n\n"
                     quote_consult=consult+message_text                    
                     quote_sa=seeking_alpha+message_text+inter2+message_text
                     quote_yahoo=yahoofinance+message_text+inter3+message_text+inter4
-					quote_marketbeat=marketbeat+message_text
+                    quote_marketbeat=marketbeat+message_text
                     quote=quote_consult+space+quote_sa+space+quote_yahoo+space+quote_marketbeat+space
                     send_message(sender_id,quote)
                 if messaging_event.get("delivery"):  # delivery confirmation
