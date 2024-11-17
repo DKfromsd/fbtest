@@ -14,6 +14,8 @@ def verify():
     # return the 'hub.challenge' value in the query arguments
     if request.args.get("hub.mode") == "subscribe" and request.args.get("hub.challenge"):
         if not request.args.get("hub.verify_token") == os.environ["VERIFY_TOKEN"]:
+            # os.environ.get("VERIFY_TOKEN", "default_verify_token")
+
             return "Verification token mismatch", 403
         return request.args["hub.challenge"], 200
     return "Hello world", 200
@@ -34,8 +36,10 @@ def webhook():
                     sender_id = messaging_event["sender"]["id"]        # the facebook ID of the person sending you the message
                     recipient_id = messaging_event["recipient"]["id"]  # the recipient's ID, which should be your page's facebook ID
                     message_text = messaging_event["message"]["text"]  # the message's text
-                    # Test for Fiance search result
-					#https://finance.yahoo.com/quote/GLD?p=GLD&.tsrc=fin-srch-v1
+                    # message_text = messaging_event["message"].get("text", "")
+                    
+                    # Test for Finance search result
+					# https://finance.yahoo.com/quote/GLD?p=GLD&.tsrc=fin-srch-v1
                     yahoofinance="https://finance.yahoo.com/quote/"
                     inter3="?p="
                     inter4="&.tsrc=fin-srch-v1"
@@ -62,6 +66,8 @@ def send_message(recipient_id, message_text):
     log("sending message to {recipient}: {text}".format(recipient=recipient_id, text=message_text))
     params = {
         "access_token": os.environ["PAGE_ACCESS_TOKEN"]
+        # os.environ.get("PAGE_ACCESS_TOKEN", "default_page_access_token")
+
     }
     headers = {
         "Content-Type": "application/json"
@@ -81,7 +87,7 @@ def send_message(recipient_id, message_text):
 
 
 def log(message):  # simple wrapper for logging to stdout on heroku
-    print str(message)
+    print (str(message))
     sys.stdout.flush()
 
 
